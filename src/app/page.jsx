@@ -10,7 +10,7 @@ export default function Home() {
       {/* Conteneur pour centrer la carte */}
       <main className="flex justify-center mt-8">
         <section className="w-full max-w-md">
-          <MediaCard />
+          <MediaCard mediaId={5} />
         </section>
       </main>
     </div>

@@ -1,4 +1,5 @@
 import { FaUserCircle } from "react-icons/fa";
+import Link from "next/link";
 
 const NavbarDesktop = () => {
   return (
@@ -10,8 +11,8 @@ const NavbarDesktop = () => {
         <div className="w-1/2">
           <nav className="w-full flex justify-end">
             <ul className="nav flex gap-4 text-text-secondary">
-              <li className="nav-item active">Series</li>
-              <li className="nav-item">Films</li>
+              <Link href={"/series"} >Series</Link>
+              <Link href={"/movies"}>Films</Link>
             </ul>
           </nav>
         </div>

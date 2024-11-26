@@ -1,16 +1,18 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
-export default function MediaCard() {
+export default function MediaCard({ mediaId}) {
   return (
     <article className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-gray-800 transform transition duration-300 hover:scale-105 hover:shadow-xl">
+      <Link href={`/movies/${mediaId}`}>
+      
       {/* Image du film */}
       <figure className="relative h-56 w-full">
         <Image
-          src="/assets/films/arcane.png"  // Remplace cette source par l'image d'Arcane
+          src="/assets/films/arcane.png"
           alt="Arcane - League of Legends"
-          layout="fill"
-          objectFit="cover"
-          className="rounded-t-lg"
+          fill
+          className="rounded-t-lg object-cover object-center"
         />
       </figure>
 
@@ -20,7 +22,7 @@ export default function MediaCard() {
           Arcane - League of Legends
         </h2>
         <p className="text-gray-400 text-sm leading-relaxed">
-          Arcane est une série animée qui explore l'origine des célèbres personnages de "League of Legends". Plongez dans un monde rempli de tensions, de trahisons et de magie.
+          Arcane est une série animée qui explore l&#39;origine des célèbres personnages de &#34;League of  Legends&#34;. Plongez dans un monde rempli de tensions, de trahisons et de magie.
         </p>
       </section>
 
@@ -39,6 +41,7 @@ export default function MediaCard() {
           #Action
         </span>
       </section>
+      </Link>
     </article>
   );
 }
