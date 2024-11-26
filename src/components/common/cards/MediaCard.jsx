@@ -9,7 +9,7 @@ export default function MediaCard({ mediaId}) {
       {/* Image du film */}
       <figure className="relative h-56 w-full">
         <Image
-          src="/assets/films/arcane.png"  // Remplace cette source par l'image d'Arcane
+          src="/assets/films/arcane.png"
           alt="Arcane - League of Legends"
           fill
           className="rounded-t-lg object-cover object-center"
