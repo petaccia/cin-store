@@ -1,5 +1,6 @@
+import React from "react";
 import NavbarDesktop from "@/components/layout/navbar/NavbarDesktop";
-import MediaCard from "@/components/common/cards/MediaCard";
+import PopularMovies from "../components/movies/PopularMovies";
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
       {/* Conteneur pour centrer la carte */}
       <main className="flex justify-center mt-8">
         <section className="w-full max-w-md">
-          <MediaCard mediaId={5} />
+          <PopularMovies />
         </section>
       </main>
     </div>
