@@ -41,3 +41,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#ignore pnpm files
+pnpm-lock.yaml
+
+#ignore idea files
+.idea/*
