@@ -9,8 +9,8 @@ export default function Home() {
       <NavbarDesktop />
 
       {/* Conteneur pour centrer la carte */}
-      <main className="flex justify-center mt-8">
-        <section className="w-full max-w-md">
+      <main className="">
+        <section className="w-full max-w-screen-xl mx-auto">
           <PopularMovies />
         </section>
       </main>
