@@ -12,7 +12,9 @@ export default function MediaCard({ mediaId}) {
           src="/assets/films/arcane.png"
           alt="Arcane - League of Legends"
           fill
-          className="rounded-t-lg object-cover object-center"
+          layout="fill"
+          priority
+          className="rounded-t-lg object-top object-cover"
         />
       </figure>
 
