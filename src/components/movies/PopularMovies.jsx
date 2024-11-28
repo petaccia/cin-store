@@ -11,13 +11,14 @@ export default async function PopularMovies() {
         
         // Retourne les 6 premiers films populaires
         const topMovies = movies.slice(0, 6);
+        console.log('Films populaires:', topMovies);
 
         return (
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 mt-4 justify-items-center ">
                 {topMovies.map((movie) => (
                     <div key={movie.id}>
                         {/* Passe les propriétés spécifiques du film au composant MediaCard */}
-                        <MediaCard movie={movie} />
+                        <MediaCard media={movie} />
                     </div>
                 ))}
             </section>
