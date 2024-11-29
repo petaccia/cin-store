@@ -26,9 +26,10 @@ export default function MediaCard({ media, isPopular }) {
         {/* Image du film */}
         <figure className="relative w-full h-48">
           <Image
-            src={`${process.env.TMDB_IMAGE_BASE_PATH}${media.backdrop_path}`}
+            src={`${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_PATH}${media.backdrop_path}`}
             alt={media.title}
-            fill
+            width={400}
+            height={225}
             className="rounded-t-lg object-cover"
             priority
           />
