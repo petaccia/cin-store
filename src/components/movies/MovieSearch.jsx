@@ -13,8 +13,20 @@ export default function MovieSearch () {
   const fetchMovies = async (searchQuery) => {
     try {
       const response = await fetch(`/api/movie/search?query=${searchQuery}`); // Requête à l'API du projet de TMDB pour la recherche de films 
-      
+
+      // Si la recherche est vide réinitialiser les résultats
+      if (!searchQuery) {
+        setResults([]);
+        return;
+      }
+
+      // si la réponse est 400 réinitialiser les résultats
       if (response.status === 400) {
+        setResults([]);
+        return;
+      }
+      
+      if (response.status === 404) {
         return <Custom404 />; // Afficher une page 404 si la recherche est vide
       }
 
@@ -41,6 +53,7 @@ export default function MovieSearch () {
         placeholder="Rechercher un film..."
         className="w-full p-3 border rounded-lg text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition ease-in-out duration-200 shadow-sm"
         minLength={2} // Déclenchement après 2 caractères
+        debounceTimeout={300} // Délai de 300ms
         onChange={(e) => fetchMovies(e.target.value)} // Fetch les résultats sur changement
         onFocus={() => setHashFocused(true)} // Activer le focus
         onBlur={() => setHashFocused(false)} // Désactiver le focus
