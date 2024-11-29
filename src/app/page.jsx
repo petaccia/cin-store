@@ -1,11 +1,10 @@
 import React from "react";
 import PopularMovies from "../components/movies/popular/PopularMovies";
+import Genres from "@/components/genres/Genres";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-     
-
       {/* Conteneur principal */}
       <main className="px-4 sm:px-8 lg:px-16 py-12">
         {/* Titre principal */}
@@ -18,10 +17,18 @@ export default function Home() {
           </h2>
         </header>
 
-        {/* Section des films populaires */}
-        <section className="w-full max-w-screen-xl mx-auto">
-          <PopularMovies />
-        </section>
+        {/* Layout avec une grille */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Colonne de gauche pour les genres */}
+          <aside className="lg:col-span-1">
+            <Genres />
+          </aside>
+
+          {/* Section des films populaires */}
+          <section className="lg:col-span-3">
+            <PopularMovies />
+          </section>
+        </div>
       </main>
     </div>
   );
