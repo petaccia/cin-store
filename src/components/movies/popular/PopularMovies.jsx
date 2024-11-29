@@ -1,5 +1,5 @@
-import fetchMoviesFromAPI from '../../utils/moviesClient';
-import MediaCard from '../common/cards/MediaCard';
+import fetchMoviesFromAPI from '../../../utils/moviesClient';
+import MediaCard from '../../common/cards/MediaCard';
 
 export default async function PopularMovies() {
     try {

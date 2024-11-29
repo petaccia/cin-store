@@ -1,6 +1,6 @@
 import { FaUserCircle } from "react-icons/fa";
 import Link from "next/link";
-import MovieSearch from "@/components/movies/MovieSearch";
+import MovieSearch from "@/components/movies/moviesSearch/MovieSearch";
 
 const NavbarDesktop = () => {
   return (

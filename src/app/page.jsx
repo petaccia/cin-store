@@ -1,6 +1,5 @@
 import React from "react";
-import NavbarDesktop from "@/components/layout/navbar/NavbarDesktop";
-import PopularMovies from "../components/movies/PopularMovies";
+import PopularMovies from "../components/movies/popular/PopularMovies";
 
 export default function Home() {
   return (
