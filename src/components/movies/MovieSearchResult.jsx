@@ -14,7 +14,9 @@ export default function MovieSearchResult({ movies }) {
       {movies.map((movie) => (
         <Link
           key={movie.id}
-          href={`/movie/${movie.id}`}
+          href={`/movies/${movie.id}`}
+          passHref
+          onMouseDown={(e) => e.preventDefault()}
           className="flex items-center py-4 px-2 transition ease-in-out duration-200 border-b border-background-header shadow-sm shadow-background-body group hover:bg-background-hover"
         >
           {/* Image du film */}
