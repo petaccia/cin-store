@@ -1,3 +1,4 @@
+import NavbarDesktop from "@/components/layout/navbar/NavbarDesktop";
 import "./globals.css";
 
 export const metadata = {
@@ -10,6 +11,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body
       >
+         {/* Navbar */}
+      <NavbarDesktop />
         {children}
       </body>
     </html>

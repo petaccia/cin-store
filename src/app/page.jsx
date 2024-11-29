@@ -5,8 +5,7 @@ import PopularMovies from "../components/movies/PopularMovies";
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      {/* Navbar */}
-      <NavbarDesktop />
+     
 
       {/* Conteneur principal */}
       <main className="px-4 sm:px-8 lg:px-16 py-12">
