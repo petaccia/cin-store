@@ -1,17 +1,19 @@
+// components/MediaCard.jsx
+import getGenreColor from '@/components/genres/GenreColors';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function MediaCard({ media, isPopular }) {
+export default function MediaCard({ media, isPopular, genres }) {
   // Fonction pour formater la date
   const formatDate = (date) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(date).toLocaleDateString('fr-FR', options);
   };
 
- // fonction pour arrondir le vote overage à 1 décimal
+  // Fonction pour arrondir le vote average à 1 décimal
   const roundVote = (vote) => {
     return Math.round(vote * 10) / 10;
- }
+  }
 
   return (
     <article className="relative max-w-xs rounded-lg overflow-hidden shadow-lg bg-gray-800 transform transition duration-300 hover:scale-105 hover:shadow-xl">
@@ -56,20 +58,20 @@ export default function MediaCard({ media, isPopular }) {
           </div>
         </section>
 
-        {/* Tags */}
+        {/* Tags dynamiques des genres */}
         <section className="px-4 py-2 flex flex-wrap gap-2">
-          <span className="inline-block bg-blue-600 text-white rounded-full px-3 py-1 text-xs font-medium">
-            #Animation
-          </span>
-          <span className="inline-block bg-purple-600 text-white rounded-full px-3 py-1 text-xs font-medium">
-            #Netflix
-          </span>
-          <span className="inline-block bg-red-600 text-white rounded-full px-3 py-1 text-xs font-medium">
-            #Aventure
-          </span>
-          <span className="inline-block bg-green-600 text-white rounded-full px-3 py-1 text-xs font-medium">
-            #Action
-          </span>
+          {media.genre_ids?.slice(0, 4).map((genreId) => {
+            // Trouver le genre correspondant à l'ID
+            const genre = genres?.find(g => g.id === genreId);
+            return genre ? (
+              <span 
+                key={genreId}
+                className={`inline-block ${getGenreColor(genre.name)} text-white rounded-full px-3 py-1 text-xs font-medium`}
+              >
+                {genre.name}
+              </span>
+            ) : null;
+          })}
         </section>
       </Link>
     </article>
