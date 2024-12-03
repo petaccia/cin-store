@@ -1,6 +1,6 @@
 import React from 'react'
 import SearchSidebarMovies from '../../../components/movies/moviesSearch/SearchSidebarMovies';
-import fetchMoviesFromAPI from '@/utils/moviesClient';
+import fetchMoviesFromAPI from '@/lib/api/apiClentTmdb';
 
 const MoviesSearchLayout = async ({ children }) => {
     const {genres} = await fetchMoviesFromAPI('/genre/movie/list');

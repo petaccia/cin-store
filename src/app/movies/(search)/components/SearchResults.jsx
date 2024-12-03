@@ -1,5 +1,5 @@
 import MediaCard from '@/components/common/cards/MediaCard';
-import fetchMoviesFromAPI from '@/utils/moviesClient';
+import fetchMoviesFromAPI from '@/lib/api/apiClentTmdb';
 import React from 'react'
 
 const SearchResults = async ({ searchParams, genreId }) => {
