@@ -5,7 +5,7 @@ import fetchMoviesFromAPI from '@/utils/moviesClient';
 const MoviesSearchLayout = async ({ children }) => {
     const {genres} = await fetchMoviesFromAPI('/genre/movie/list');
   return (
-    <div>
+    <div className="flex w-full mx-auto">
         <SearchSidebarMovies genres={genres} />
         {children}
     </div>

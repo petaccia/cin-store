@@ -1,8 +1,8 @@
-export default async function MoviesGenresIdPage ({ params }) {
-    const { id } = await params;
+import SearchResults from "../../components/SearchResults";
+
+export default async function MoviesGenresIdPage ({ params, searchParams }) {
+    
     return (
-        <div>
-            <h1>Genre page with id : {id}</h1>
-        </div>
+        <SearchResults searchParams={searchParams} genreId={params.id} />
     )
 }
