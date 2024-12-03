@@ -1,19 +1,25 @@
 import MediaCard from '@/components/common/cards/MediaCard';
-import fetchMoviesFromAPI from '@/lib/api/apiClentTmdb';
-import React from 'react'
+import fetchMoviesFromAPI from '../../../../lib/api/apiClentTmdb';
 
 const SearchResults = async ({ searchParams, genreId }) => {
-  const { results } = await fetchMoviesFromAPI(`/discover/movie`, [
-    { key: 'with_genres', value: genreId },
-    { key: 'sort_by', value: searchParams.sort },
-    { key: 'release_date.gte', value: searchParams["release_date.gte"] },
-    { key: 'release_date.lte', value: searchParams["release_date.lte"] },
-  ]);
+  const { genres } = await fetchMoviesFromAPI('/genre/movie/list');
+  const { results } = await fetchMoviesFromAPI(`/discover/movie`, {
+    with_genres: genreId,
+    sort_by: searchParams.sort,
+    'release_date.gte': searchParams["release_date.gte"],
+    'release_date.lte': searchParams["release_date.lte"],
+  });
+
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto my-16">
-        {results.filter((movie) => movie.poster_path)
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-20">
+      {results
+        .filter((movie) => movie.backdrop_path)
         .map((movie) => (
-          <MediaCard key={movie.id} media={movie} />
+          <MediaCard 
+            key={movie.id} 
+            media={movie} 
+            genres={genres}
+          />
         ))}
     </div>
   )

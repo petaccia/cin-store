@@ -28,7 +28,7 @@ const FormsearchSidebarMovies = () => {
     };
 
     return (
-        <div className="p-6 mt-10 bg-background-body  rounded-lg shadow-2xl shadow-background-hover">
+        <div className="p-6 mt-10 bg-background-body max-w-[300px] rounded-lg shadow-2xl shadow-background-hover">
             <div className="mb-6 border-b border-border">
                 <h2 className="text-2xl font-bold text-text-primary mb-4 font-poppins text-center">
                     Filtrer les films
