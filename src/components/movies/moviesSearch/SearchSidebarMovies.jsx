@@ -26,7 +26,7 @@ const SearchSidebarMovies = ({ genres }) => {
     const title = getSidebarTitle();
 
   return (
-    <div className="w-1/4">
+    <div className="max-w-screen-md mx-auto">
         <header className="mb-6">
             <h1 className="text-2xl lg:text-3xl font-bold text-text-primary mb-6 text-center">Tous les films d' 
                 <span className="text-text-highlight"> {title} </span>

@@ -34,7 +34,7 @@ const FormsearchSidebarMovies = () => {
           <label htmlFor="fromDate" className="block text-sm font-medium text-text-secondary">
             Date de sortie
           </label>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col items-center gap-4">
             <div className="flex-1">
               <label htmlFor="fromDate" className="block text-xs text-text-muted">
                 Du

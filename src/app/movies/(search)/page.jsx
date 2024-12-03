@@ -1,7 +1,7 @@
-export default function Movies() {
+import SearchResults from "./components/SearchResults";
+
+export default function MoviesPage( { searchParams } ) {
     return (
-        <div>
-            <h1>Movies</h1>
-        </div>
+       <SearchResults searchParams={searchParams} />
     )
 }
