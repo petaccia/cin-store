@@ -1,8 +1,17 @@
-export default async function MoviesIdPage ({ params }) {
+import Custom404 from "@/app/not-found";
+import MovieDetails from "@/components/movies/movieDetails/MovieDetails";
+import fetchMoviesFromAPI from "../../../lib/api/apiClentTmdb";
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
+
+export default async function MoviesIdPage({ params, searchParams }) {
     const { id } = await params;
-    return (
-        <div>
-            <h1>Movie page with id : {id}</h1>
-        </div>
-    )
-};
+    const movie = await fetchMoviesFromAPI(`/movie/${id}`);
+
+    if (!movie.original_title) {
+        return <Custom404 />;
+    }
+
+    return <MovieDetails movie={movie} />;
+}

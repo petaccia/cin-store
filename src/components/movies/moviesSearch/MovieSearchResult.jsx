@@ -20,7 +20,7 @@ export default function MovieSearchResult({ movies }) {
           <div className="flex-shrink-0 relative overflow-hidden rounded-md">
             <Image
               src={movie.backdrop_path 
-                ? `${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_PATH}${movie.backdrop_path}`
+                ? `${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_PATH}/w500${movie.backdrop_path}`
                 : '/images/placeholder.jpg'
               }
               alt={movie.title}

@@ -3,11 +3,12 @@ import fetchMoviesFromAPI from '../../../../lib/api/apiClentTmdb';
 
 const SearchResults = async ({ searchParams, genreId }) => {
   const { genres } = await fetchMoviesFromAPI('/genre/movie/list');
+  const searchParamsObj = await searchParams;
   const { results } = await fetchMoviesFromAPI(`/discover/movie`, {
     with_genres: genreId,
-    sort_by: searchParams.sort,
-    'release_date.gte': searchParams["release_date.gte"],
-    'release_date.lte': searchParams["release_date.lte"],
+    sort_by: searchParamsObj.sort,
+    'release_date.gte': searchParamsObj["release_date.gte"],
+    'release_date.lte': searchParamsObj["release_date.lte"],
   });
 
   return (
