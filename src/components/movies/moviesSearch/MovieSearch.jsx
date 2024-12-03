@@ -1,67 +1,53 @@
 "use client";
-
-import ErrorPage from '@/app/error';
-import Custom404 from '@/app/not-found';
 import React, { useState } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import MovieSearchResult from './MovieSearchResult';
+import { FaSearch } from 'react-icons/fa';
 
-export default function MovieSearch () {
-  const [results, setResults] = useState([]); // Résultats de la recherche
-  const [hashFocused, setHashFocused] = useState(false); // État pour savoir si l'input est sur les résultats de recherche ou non
+export default function MovieSearch() {
+  const [results, setResults] = useState([]);
+  const [hasFocus, setHasFocus] = useState(false);
 
   const fetchMovies = async (searchQuery) => {
+    if (!searchQuery) {
+      setResults([]);
+      return;
+    }
+
     try {
-      const response = await fetch(`/api/movie/search?query=${searchQuery}`); // Requête à l'API du projet de TMDB pour la recherche de films 
-
-      // Si la recherche est vide réinitialiser les résultats
-      if (!searchQuery) {
-        setResults([]);
-        return;
-      }
-
-      // si la réponse est 400 réinitialiser les résultats
-      if (response.status === 400) {
-        setResults([]);
-        return;
-      }
+      const response = await fetch(`/api/movie/search?query=${searchQuery}`);
       
-      if (response.status === 404) {
-        return <Custom404 />; // Afficher une page 404 si la recherche est vide
-      }
-
       if (!response.ok) {
-        return <ErrorPage />; // Afficher une page d'erreur si la requête échoue
+        throw new Error('Erreur lors de la recherche');
       }
 
-      // Récupérer les données et filtrer les résultats
       const { results: data } = await response.json();
-      console.log("Résultats de recherche:", data);
-
-      setResults(data.filter((movie) => movie.backdrop_path)); // Ajouter uniquement les films avec une image
+      setResults(data.filter(movie => movie.backdrop_path));
+      
     } catch (error) {
-      console.error("Erreur lors de la recherche:", error);
-      setResults([]); // Réinitialiser les résultats en cas d'erreur
+      console.error("Erreur de recherche:", error);
+      setResults([]);
     }
   };
 
   return (
-    <div className="relative p-4 max-w-lg mx-auto">
-      {/* Barre de recherche */}
-      <DebounceInput
-        type="text"
-        placeholder="Rechercher un film..."
-        className="w-full p-3 border rounded-lg text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition ease-in-out duration-200 shadow-sm"
-        minLength={2} // Déclenchement après 2 caractères
-        debounceTimeout={300} // Délai de 300ms
-        onChange={(e) => fetchMovies(e.target.value)} // Fetch les résultats sur changement
-        onFocus={() => setHashFocused(true)} // Activer le focus
-        onBlur={() => setHashFocused(false)} // Désactiver le focus
-      />
+    <div className="relative">
+      <div className="relative">
+        <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary" />
+        <DebounceInput
+          type="text"
+          placeholder="Rechercher un film..."
+          className="w-full pl-10 pr-4 py-2 bg-background-body/80  border border-border rounded-lg text-text-primary placeholder-text-secondary focus:outline-none focus:border-accent-primary transition-colors duration-300"
+          minLength={2}
+          debounceTimeout={300}
+          onChange={(e) => fetchMovies(e.target.value)}
+          onFocus={() => setHasFocus(true)}
+          onBlur={() => setTimeout(() => setHasFocus(false), 200)}
+        />
+      </div>
 
-      {/* Résultats de la recherche */}
-      {results.length > 0 && hashFocused && (
-        <MovieSearchResult movies={results} /> // Afficher les résultats si la recherche est active du composant MovieSearchResult
+      {results.length > 0 && hasFocus && (
+        <MovieSearchResult movies={results} />
       )}
     </div>
   );
