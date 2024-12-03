@@ -8,12 +8,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-      >
-         {/* Navbar */}
-      <NavbarDesktop />
-        {children}
+    <html lang="fr">
+      <body>
+        <NavbarDesktop />
+        <main className="pt-20">
+          {children}
+        </main>
       </body>
     </html>
   );
