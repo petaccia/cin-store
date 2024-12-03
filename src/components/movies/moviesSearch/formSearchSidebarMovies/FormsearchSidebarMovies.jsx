@@ -1,94 +1,99 @@
 "use client";
-import { format } from 'date-fns';
-import { useRouter } from 'next/navigation';
-import { usePathname } from 'next/navigation';
+import { format, subYears } from 'date-fns';
+import { useRouter, usePathname } from 'next/navigation';
 
 const FormsearchSidebarMovies = () => {
     const Router = useRouter();
     const pathname = usePathname();
 
+    const today = format(new Date(), 'yyyy-MM-dd');
+    const twentyYearsAgo = format(subYears(new Date(), 20), 'yyyy-MM-dd');
 
-  const today = format(new Date(), 'yyyy-MM-dd');
+    const handleForm = (e) => {
+        e.preventDefault();
+        const form = new FormData(e.currentTarget);
+        const searchParams = new URLSearchParams();
 
-  const handleForm = (e) => {
-    e.preventDefault();
-    const form = new FormData(e.currentTarget);
-  const searchParams = new URLSearchParams(form);
-  searchParams.append('sort_by', form.get('sort'));
-  searchParams.append('release_date.gte', form.get('fromDate'));
-  searchParams.append('release_date.lte', form.get('toDate'));
+        const params = {
+            'sort_by': form.get('sort'),
+            'release_date.gte': form.get('fromDate'),
+            'release_date.lte': form.get('toDate')
+        };
 
-  Router.push(`${pathname}?${searchParams.toString()}`);
-  };
-  
+        Object.entries(params).forEach(([key, value]) => {
+            if (value) searchParams.append(key, value);
+        });
 
+        Router.push(`${pathname}?${searchParams.toString()}`);
+    };
 
-  return (
-    <div className="p-4 bg-background-card rounded-md shadow-xl">
-        <div className="mb-4 border-b border-border text-center">
-            <h2 className="text-2xl font-bold text-text-primary mb-4 font-poppins">Filtrer</h2>
-        </div>
-      <form method="GET" onSubmit={handleForm} action="/movies/filter" className="space-y-6">
-        {/* Date de sortie */}
-        <div className="space-y-2 border-b-2 pb-4 border-border">
-          <label htmlFor="fromDate" className="block text-sm font-medium text-text-secondary">
-            Date de sortie
-          </label>
-          <div className="flex flex-col items-center gap-4">
-            <div className="flex-1">
-              <label htmlFor="fromDate" className="block text-xs text-text-muted">
-                Du
-              </label>
-              <input
-                type="date"
-                name="fromDate"
-                id="fromDate"
-                defaultValue={today}
-                className="mt-1 w-full rounded-md bg-background-body text-text-primary border border-border p-2 shadow-sm focus:border-accent-primary focus:ring-accent-primary"
-              />
+    return (
+        <div className="p-6 mt-10 bg-background-body  rounded-lg shadow-2xl shadow-background-hover">
+            <div className="mb-6 border-b border-border">
+                <h2 className="text-2xl font-bold text-text-primary mb-4 font-poppins text-center">
+                    Filtrer les films
+                </h2>
             </div>
-            <div className="flex-1">
-              <label htmlFor="toDate" className="block text-xs text-text-muted">
-                Au
-              </label>
-              <input
-                type="date"
-                name="toDate"
-                id="toDate"
-                defaultValue={today}
-                className="mt-1 w-full rounded-md bg-background-body text-text-primary border border-border p-2 shadow-sm focus:border-accent-primary focus:ring-accent-primary"
-              />
-            </div>
-          </div>
-        </div>
 
-        {/* Trier par */}
-        <div>
-          <label htmlFor="sort" className="block text-sm font-medium text-text-secondary">
-            Trier par
-          </label>
-          <select
-            name="sort"
-            id="sort"
-            defaultValue="popularity.desc"
-            className="mt-1 block w-full rounded-md bg-background-body text-text-primary border border-border p-2 shadow-sm focus:border-accent-primary focus:ring-accent-primary"
-          >
-            <option value="popularity.desc">Popularité</option>
-            <option value="vote_average.desc">Note</option>
-            <option value="vote_count.desc">Nombre de votes</option>
-          </select>
-        </div>
+            <form onSubmit={handleForm} className="space-y-6">
+                <div className="space-y-4 border-b border-border pb-6">
+                    <label className="block text-lg font-medium text-text-secondary">
+                        Date de sortie
+                    </label>
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <div>
+                            <label htmlFor="fromDate" className="block text-sm text-text-muted mb-2">
+                                Du
+                            </label>
+                            <input
+                                type="date"
+                                name="fromDate"
+                                id="fromDate"
+                                defaultValue={twentyYearsAgo}
+                                className="w-full rounded-md bg-background-body text-text-primary border border-border p-2  outline-none"
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="toDate" className="block text-sm text-text-muted mb-2">
+                                Au
+                            </label>
+                            <input
+                                type="date"
+                                name="toDate"
+                                id="toDate"
+                                defaultValue={today}
+                                className="w-full rounded-md bg-background-body text-text-primary border border-border p-2 outline-none"
+                            />
+                        </div>
+                    </div>
+                </div>
 
-        {/* Bouton */}
-        <button
-          type="submit"
-          className="w-full py-2 px-4 bg-accent-primary text-text-primary font-medium rounded-md shadow-md hover:bg-accent-secondary focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2"
-        >
-          FILTRER
-        </button>
-      </form>
-    </div>
-  );
+                <div className="space-y-2">
+                    <label htmlFor="sort" className="block text-lg font-medium text-text-secondary">
+                        Trier par
+                    </label>
+                    <select
+                        name="sort"
+                        id="sort"
+                        defaultValue="popularity.desc"
+                        className="w-full rounded-md bg-background-body text-text-primary border border-border p-2 focus:border-accent-primary focus:ring-1 focus:ring-accent-primary"
+                    >
+                        <option value="popularity.desc">Popularité</option>
+                        <option value="vote_average.desc">Note</option>
+                        <option value="vote_count.desc">Nombre de votes</option>
+                        <option value="release_date.desc">Date de sortie</option>
+                    </select>
+                </div>
+
+                <button
+                    type="submit"
+                    className="w-full py-3 px-4 bg-accent-primary text-text-primary font-medium rounded-md shadow-md hover:bg-accent-secondary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2"
+                >
+                    APPLIQUER LES FILTRES
+                </button>
+            </form>
+        </div>
+    );
 };
 
 export default FormsearchSidebarMovies;
