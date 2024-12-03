@@ -1,4 +1,4 @@
-import fetchMoviesFromAPI from '@/utils/moviesClient';
+import fetchMoviesFromAPI from '@/lib/api/apiClentTmdb';
 import Link from 'next/link';
 import React from 'react';
 

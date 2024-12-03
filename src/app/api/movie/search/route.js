@@ -1,4 +1,4 @@
-import fetchMoviesFromAPI from "@/utils/moviesClient";
+import fetchMoviesFromAPI from "@/lib/api/apiClentTmdb";
 
 export async function GET(request) {
     const { searchParams } = new URL(request.url);

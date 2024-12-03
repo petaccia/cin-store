@@ -1,4 +1,4 @@
-import fetchMoviesFromAPI from '../../../utils/moviesClient';
+import fetchMoviesFromAPI from '../../../lib/api/apiClentTmdb';
 import MediaCard from '../../common/cards/MediaCard';
 
 export default async function PopularMovies() {
