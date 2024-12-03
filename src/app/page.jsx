@@ -2,6 +2,9 @@ import React from "react";
 import PopularMovies from "../components/movies/popular/PopularMovies";
 import Genres from "@/components/genres/Genres";
 
+// Revalidation de la page chaque 24 heures
+export const revalidate = 86400; 
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
