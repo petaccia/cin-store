@@ -16,7 +16,7 @@ export default function MediaCard({ media, isPopular, genres }) {
   }
 
   return (
-    <article className="relative max-w-xs rounded-lg overflow-hidden shadow-lg bg-gray-800 transform transition duration-300 hover:scale-105 hover:shadow-xl">
+    <article className="w-[300px] h-[400px] relative bg-background-header/80 backdrop-blur-md rounded-xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:shadow-accent-primary/20">
       <Link href={`/movies/${media.id}`} passHref>
         {/* Titre "Films populaires" */}
         {isPopular && (
@@ -30,8 +30,7 @@ export default function MediaCard({ media, isPopular, genres }) {
           <Image
             src={`${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_PATH}${media.backdrop_path}`}
             alt={media.title}
-            width={400}
-            height={225}
+            fill
             className="rounded-t-lg object-cover"
             priority
           />
