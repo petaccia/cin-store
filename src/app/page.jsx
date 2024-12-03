@@ -1,38 +1,39 @@
 import React from "react";
-import PopularMovies from "../components/movies/popular/PopularMovies";
+import PopularMovies from "@/components/movies/popular/PopularMovies";
 import Genres from "@/components/genres/Genres";
 
-// Revalidation de la page chaque 24 heures
-export const revalidate = 86400; 
+// Revalidation toutes les 24 heures
+export const revalidate = 86400;
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      {/* Conteneur principal */}
-      <main className="px-4 sm:px-8 lg:px-16 py-12">
-        {/* Titre principal */}
-        <header className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-semibold text-white leading-tight mb-4">
-            Bienvenue sur notre site de films!
-          </h1>
-          <h2 className="text-3xl sm:text-4xl font-semibold text-white opacity-80">
-            Films populaires
-          </h2>
-        </header>
+    <main className="container mx-auto px-4 py-8">
+      {/* En-tête */}
+      <header className="text-center mb-12">
+        <h1 className="text-4xl sm:text-5xl font-bold text-text-primary leading-tight mb-8">
+          Découvrez les meilleurs films
+        </h1>
+        <p className="text-xl text-text-secondary mb-20">
+          Explorez notre sélection de films populaires et trouvez votre prochain coup de cœur
+        </p>
+        <h2 className="text-3xl sm:text-4xl font-semibold text-text-highlight">
+          Films populaires
+        </h2>
+      </header>
 
-        {/* Layout avec une grille */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Colonne de gauche pour les genres */}
-          <aside className="lg:col-span-1">
-            <Genres />
-          </aside>
+      {/* Contenu principal */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        {/* Barre latérale des genres */}
+        <aside className="lg:col-span-1 bg-background-secondary rounded-lg p-4">
+          <h3 className="text-xl font-semibold mb-4">Genres</h3>
+          <Genres />
+        </aside>
 
-          {/* Section des films populaires */}
-          <section className="lg:col-span-3">
-            <PopularMovies />
-          </section>
-        </div>
-      </main>
-    </div>
+        {/* Liste des films */}
+        <section className="lg:col-span-3">
+          <PopularMovies />
+        </section>
+      </div>
+    </main>
   );
 }
