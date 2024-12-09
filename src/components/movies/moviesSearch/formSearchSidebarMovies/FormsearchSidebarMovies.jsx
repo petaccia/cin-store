@@ -1,13 +1,16 @@
 "use client";
-import { format, subYears } from 'date-fns';
-import { useRouter, usePathname } from 'next/navigation';
+
+import React, { useState } from "react";
+import DateRangePicker from "../../../common/date/DateRangePicker";
+import { useRouter, usePathname } from "next/navigation";
+import { format } from "date-fns";
 
 const FormsearchSidebarMovies = () => {
     const Router = useRouter();
     const pathname = usePathname();
 
-    const today = format(new Date(), 'yyyy-MM-dd');
-    const twentyYearsAgo = format(subYears(new Date(), 20), 'yyyy-MM-dd');
+    const [fromDate, setFromDate] = useState(new Date(new Date().setFullYear(new Date().getFullYear() - 20)));
+    const [toDate, setToDate] = useState(new Date());
 
     const handleForm = (e) => {
         e.preventDefault();
@@ -15,9 +18,9 @@ const FormsearchSidebarMovies = () => {
         const searchParams = new URLSearchParams();
 
         const params = {
-            'sort_by': form.get('sort'),
-            'release_date.gte': form.get('fromDate'),
-            'release_date.lte': form.get('toDate')
+            "sort_by": form.get("sort"),
+            "release_date.gte": format(fromDate, "yyyy-MM-dd"),
+            "release_date.lte": format(toDate, "yyyy-MM-dd")
         };
 
         Object.entries(params).forEach(([key, value]) => {
@@ -40,32 +43,12 @@ const FormsearchSidebarMovies = () => {
                     <label className="block text-lg font-medium text-text-secondary">
                         Date de sortie
                     </label>
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <div>
-                            <label htmlFor="fromDate" className="block text-sm text-text-muted mb-2">
-                                Du
-                            </label>
-                            <input
-                                type="date"
-                                name="fromDate"
-                                id="fromDate"
-                                defaultValue={twentyYearsAgo}
-                                className="w-full rounded-md bg-background-body text-text-primary border border-border p-2  outline-none"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="toDate" className="block text-sm text-text-muted mb-2">
-                                Au
-                            </label>
-                            <input
-                                type="date"
-                                name="toDate"
-                                id="toDate"
-                                defaultValue={today}
-                                className="w-full rounded-md bg-background-body text-text-primary border border-border p-2 outline-none"
-                            />
-                        </div>
-                    </div>
+                    <DateRangePicker
+                        fromDate={fromDate}
+                        toDate={toDate}
+                        setFromDate={setFromDate}
+                        setToDate={setToDate}
+                    />
                 </div>
 
                 <div className="space-y-2">
