@@ -28,9 +28,9 @@ const SearchSidebarMovies = ({ genres }) => {
     }
 
     return (
-        <div className="max-w-screen-md mx-auto mt-16">
-            <header className="mb-6">
-                <h1 className="text-2xl lg:text-3xl font-bold text-text-primary mb-6 text-center">
+        <div className="w-full flex flex-col items-center justify-center mt-16">
+            <header className="w-full flex flex-col items-center justify-center mr-40"> 
+                <h1 className="text-center text-2xl lg:text-3xl font-bold text-text-primary ">
                     Films de la catégorie{' '}
                     <span className="text-text-highlight">
                         {title}
@@ -38,7 +38,7 @@ const SearchSidebarMovies = ({ genres }) => {
                 </h1>
             </header>
             
-            <section>
+            <section className='w-full  mr-40'>
                 <FormsearchSidebarMovies />
             </section>
         </div>
