@@ -28,10 +28,31 @@ const MovieDetails = ({ movie, credits }) => {
           <div className="bg-black/60 p-6 rounded-lg">
             {/* Titre, Note, Date et Durée */}
             <div className="flex flex-col gap-8 mb-8">
-              <div className="flex justify-between items-center">
+              <div className=" flex justify-between items-center">
                 <h1 className="text-4xl font-bold text-text-primary leading-tight mb-2 shadow-text">
                   {movie.title}
                 </h1>
+                <div className='max-w-6xl flex flex-col gap-4  items-baseline'>
+                <h2 className="text-text-secondary text-sm font-bold shadow-text">Productions :</h2>
+                    {movie.production_companies.map((company) => (
+                <div className="w-full flex items-center justify-between" key={company.id}>
+                  <span 
+                  key={company.id}
+                  className={`text-sm px-3 text-accent-primary font-bold shadow-text `}>
+                  {company.name}</span>
+                    {company.logo_path && (
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_PATH}/w1280${company.logo_path}`}
+                        alt={`${company.name} Logo`}
+                        width={80}
+                        height={80}
+                        className=" object-cover brightness invert "
+                        />
+                    )}
+                  </div>
+              ))}
+              </div>
+                      
                 <div className="flex items-baseline">
                   <span className="text-accent-primary text-3xl font-bold shadow-text">
                     {Math.round(movie.vote_average * 10) / 10}
@@ -82,8 +103,8 @@ const MovieDetails = ({ movie, credits }) => {
               <Image
                 src={`${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_PATH}/w200${actor.profile_path}`}
                 alt={actor.name}
-                width={80}
-                height={80}
+                width={100}
+                height={100}
                 className="rounded-full mb-2"
               />
               <h3 className="text-lg font-medium text-text-primary shadow-text">{actor.name}</h3>

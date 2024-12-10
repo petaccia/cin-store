@@ -5,7 +5,7 @@ import fetchMoviesFromAPI from "../../../lib/api/apiClentTmdb";
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
 
-export default async function MoviesIdPage({ params, searchParams }) {
+export default async function MoviesIdPage({ params}) {
     const { id } = await params;
     const movie = await fetchMoviesFromAPI(`/movie/${id}`);
     const credits = await fetchMoviesFromAPI(`/movie/${id}/credits`);
