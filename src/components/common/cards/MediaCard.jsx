@@ -2,6 +2,7 @@
 import getGenreColor from '@/components/genres/GenreColors';
 import Image from 'next/image';
 import Link from 'next/link';
+import VoteAverage from '../vote-average/VoteAverage';
 
 export default function MediaCard({ media, isPopular, genres }) {
   // Fonction pour formater la date
@@ -10,11 +11,7 @@ export default function MediaCard({ media, isPopular, genres }) {
     return new Date(date).toLocaleDateString('fr-FR', options);
   };
 
-  // Fonction pour arrondir le vote average à 1 décimal
-  const roundVote = (vote) => {
-    return Math.round(vote * 10) / 10;
-  }
-
+ 
   return (
     <article className="w-[300px] h-[400px] relative bg-background-header/80 backdrop-blur-md rounded-xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:shadow-accent-primary/20">
       <Link href={`/movies/${media.id}`} passHref>
@@ -46,11 +43,7 @@ export default function MediaCard({ media, isPopular, genres }) {
           </p>
 
           {/* Affichage de la note moyenne */}
-          <div className="flex items-center mt-2">
-            <div className="text-yellow-400">{roundVote(media.vote_average)}</div>
-            <span className="ml-2 text-gray-300 text-xs"> / 10</span>
-          </div>
-
+          <VoteAverage vote={media.vote_average} className="absolute text-text-primary top-44 right-4 rounded-lg bg-background-header shadow-md shadow-accent-primary/20 p-2" />
           {/* Affichage de la date de sortie */}
           <div className="mt-2 text-gray-400 text-xs">
             <span>{formatDate(media.release_date)}</span>
