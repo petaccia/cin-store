@@ -97,7 +97,7 @@ const MovieDetails = ({ movie, credits }) => {
 
       {/* Acteurs principaux */}
       <MovieCredits credits={credits} />
-
+      
     </div>
   );
 };
