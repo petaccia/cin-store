@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import getGenreColor from '@/components/genres/GenreColors';
 import MovieCredits from '../movies-credits/MoviesCredits';
+import VoteAverage from '@/components/common/vote-average/VoteAverage';
 
 const MovieDetails = ({ movie, credits }) => {
   const formatDate = (date) => {
@@ -34,32 +35,29 @@ const MovieDetails = ({ movie, credits }) => {
                   {movie.title}
                 </h1>
                 <div className='max-w-6xl flex flex-col gap-4  items-baseline'>
-                <h2 className="text-text-secondary text-sm font-bold shadow-text">Productions :</h2>
-                    {movie.production_companies.map((company) => (
-                <div className="w-full flex items-center justify-between" key={company.id}>
-                  <span 
-                  key={company.id}
-                  className={`text-sm px-3 text-accent-primary font-bold shadow-text `}>
-                  {company.name}</span>
-                    {company.logo_path && (
-                      <Image
-                        src={`${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_PATH}/w1280${company.logo_path}`}
-                        alt={`${company.name} Logo`}
-                        width={80}
-                        height={80}
-                        className=" object-cover brightness invert "
+                  <h2 className="text-text-secondary text-sm font-bold shadow-text">Productions :</h2>
+                  {movie.production_companies.map((company) => (
+                    <div className="w-full flex items-center justify-between" key={company.id}>
+                      <span
+                        key={company.id}
+                        className={`text-sm px-3 text-accent-primary font-bold shadow-text `}>
+                        {company.name}</span>
+                      {company.logo_path && (
+                        <Image
+                          src={`${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_PATH}/w1280${company.logo_path}`}
+                          alt={`${company.name} Logo`}
+                          width={80}
+                          height={80}
+                          className=" object-cover brightness invert "
                         />
-                    )}
-                  </div>
-              ))}
-              </div>
-                      
-                <div className="flex items-baseline">
-                  <span className="text-accent-primary text-3xl font-bold shadow-text">
-                    {Math.round(movie.vote_average * 10) / 10}
-                  </span>
-                  <span className="text-text-secondary ml-2 shadow-text">/ 10</span>
+                      )}
+                    </div>
+                  ))}
                 </div>
+                <div className='flex gap-4 items-center'>
+                  <VoteAverage vote={movie.vote_average} dix={true} className=' text-accent-primary text-3xl font-bold shadow-text' />
+                </div>
+
               </div>
 
               {/* Genres */}
@@ -97,7 +95,7 @@ const MovieDetails = ({ movie, credits }) => {
 
       {/* Acteurs principaux */}
       <MovieCredits credits={credits} />
-      
+
     </div>
   );
 };
