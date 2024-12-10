@@ -4,7 +4,7 @@ import fetchMoviesFromAPI from "@/lib/api/apiClentTmdb";
 import { Suspense } from "react";
 
 export default async function MoviesIdPage({ params }) {
-    const { id } = params;
+    const { id } = await params;
     const movie = await fetchMoviesFromAPI(`/movie/${id}`);
     const credits = await fetchMoviesFromAPI(`/movie/${id}/credits`);
 
