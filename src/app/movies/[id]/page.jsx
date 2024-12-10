@@ -1,12 +1,10 @@
-import Custom404 from "@/app/not-found";
 import MovieDetails from "@/components/movies/movieDetails/MovieDetails";
-import fetchMoviesFromAPI from "../../../lib/api/apiClentTmdb";
+import MoviesSimilar from "@/components/movies/movies-similar/MoviesSimilar";
+import fetchMoviesFromAPI from "@/lib/api/apiClentTmdb";
+import { Suspense } from "react";
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 3600;
-
-export default async function MoviesIdPage({ params}) {
-    const { id } = await params;
+export default async function MoviesIdPage({ params }) {
+    const { id } = params;
     const movie = await fetchMoviesFromAPI(`/movie/${id}`);
     const credits = await fetchMoviesFromAPI(`/movie/${id}/credits`);
 
@@ -14,8 +12,12 @@ export default async function MoviesIdPage({ params}) {
         return <Custom404 />;
     }
 
-    return <MovieDetails 
-        movie={movie} 
-        credits={credits}
-        />;
+    return (
+        <div>
+            <MovieDetails movie={movie} credits={credits} />
+            <Suspense fallback={<p>Chargement...</p>}>
+                <MoviesSimilar movieId={id} />
+            </Suspense>
+        </div>
+    );
 }
